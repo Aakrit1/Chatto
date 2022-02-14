@@ -60,15 +60,12 @@ def predict_class(sentence, model):
 def landing():
     return render_template("landing.html")
     
-@app.route("/chatbot", methods=["POST","GET"])
+@app.route("/chatbot", methods=["POST"])
 def chatbot():
-    if request.method == "POST":
         message = request.form["msg"]
         ints = predict_class(message, model)
         res = getResponse(ints, intents)
         return render_template("chatbot.html", message=res)
-    else:    
-        return render_template("chatbot.html")
 
 @app.route("/resources")
 def resources():
